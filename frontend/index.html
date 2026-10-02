@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat with PDF</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Phosphor Icons for modern icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar for Document Management -->
+        <aside class="sidebar closed" id="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="ph ph-chats"></i> Recent Chats</h2>
+            </div>
+            
+            <input type="file" id="pdf-upload" accept="application/pdf" multiple hidden>
+            <div id="upload-status" class="status-message"></div>
+
+            <div class="document-list-container">
+                <h3>Chat Sessions</h3>
+                <ul id="document-list" class="document-list">
+                    <!-- Documents will be populated here -->
+                </ul>
+            </div>
+            
+            <div class="sidebar-footer">
+                <button id="clear-docs-btn" class="danger-btn">
+                    <i class="ph ph-trash"></i> Clear All
+                </button>
+            </div>
+        </aside>
+
+        <!-- Sidebar Resizer -->
+        <div class="sidebar-resizer" id="sidebar-resizer"></div>
+
+        <!-- Main Chat Area -->
+        <main class="chat-container">
+            <header class="chat-header">
+                <div class="header-left">
+                    <button id="toggle-sidebar-btn" class="icon-btn" title="Toggle Documents">
+                        <i class="ph ph-list"></i>
+                    </button>
+                    <div class="active-doc-info">
+                        <h1 id="active-doc-name">Select a document to start chatting</h1>
+                        <span id="active-doc-stats" class="doc-stats"></span>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <button id="new-chat-btn" class="icon-btn primary-icon-btn" title="New Chat">
+                        <i class="ph ph-plus"></i> New Chat
+                    </button>
+                </div>
+            </header>
+
+            <div id="chat-messages" class="chat-messages">
+                <!-- Chat bubbles will appear here -->
+                <div class="welcome-message">
+                    <i class="ph ph-chat-circle-dots"></i>
+                    <h2>Welcome to PDF Chatbot</h2>
+                    <p>Get started by uploading a PDF document. You can chat with it instantly!</p>
+                    <label for="pdf-upload" class="upload-btn main-upload-btn">
+                        <i class="ph ph-upload-simple"></i> Choose PDF to Upload
+                    </label>
+                </div>
+            </div>
+
+            <div class="chat-input-area">
+                <form id="chat-form">
+                    <button type="button" id="attach-file-btn" class="input-icon-btn" title="Attach file">
+                        <i class="ph ph-plus"></i>
+                    </button>
+                    <input type="text" id="chat-input" placeholder="Ask a question..." disabled autocomplete="off">
+                    <button type="button" id="voice-record-btn" class="input-icon-btn" title="Voice typing">
+                        <i class="ph ph-microphone"></i>
+                    </button>
+                    <button type="submit" id="send-btn" disabled>
+                        <i class="ph ph-paper-plane-right"></i>
+                    </button>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="toast"></div>
+
+    <!-- View Sources Modal -->
+    <div id="sources-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="ph ph-book-open"></i> Source Documents</h2>
+                <button class="close-btn" id="close-sources-modal">&times;</button>
+            </div>
+            <div class="modal-body" id="sources-modal-body">
+                <!-- Sources will be injected here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
